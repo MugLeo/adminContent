@@ -10,7 +10,6 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "moduleResolution": "node",
-    "esModuleInterop": true,
     "skipLibCheck": true,
     "incremental": true,
     "isolatedModules": true,
@@ -18,9 +17,9 @@
     "noEmit": true,
     "types": ["node", "vite/client"],
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": ["./src/*", "./scripts/*"]
     }
   },
   "files": ["./.eslintrc.cjs"],
-  "include": ["src"]
+  "include": ["src", "scripts"]
 }

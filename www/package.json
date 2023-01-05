@@ -1,6 +1,6 @@
 {
-  "name": "my-qwik-basic-starter",
-  "description": "App with Routing built-in (recommended)",
+  "name": "www-content",
+  "description": "For create content",
   "engines": {
     "node": ">=15.0.0"
   },
@@ -18,7 +18,9 @@
     "lint": "eslint \"src/**/*.ts*\"",
     "preview": "qwik build preview && vite preview --open",
     "start": "vite --open --mode ssr",
-    "qwik": "qwik"
+    "qwik": "qwik",
+    "prepare": "cd .. && husky install www/.husky",
+    "validate-branch-name": "scripts/validate-branch-name.sh"
   },
   "devDependencies": {
     "@builder.io/qwik": "0.16.2",
@@ -30,11 +32,19 @@
     "@typescript-eslint/parser": "5.48.0",
     "eslint": "8.31.0",
     "eslint-plugin-qwik": "0.16.2",
+    "husky": "^8.0.3",
     "node-fetch": "3.3.0",
     "prettier": "2.8.1",
+    "ts-node": "^10.9.1",
     "typescript": "4.9.4",
     "undici": "5.14.0",
     "vite": "4.0.3",
     "vite-tsconfig-paths": "3.5.0"
+  },
+  "dependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "echo \"[Husky] pre-commit\""
+    }
   }
 }
