@@ -1,0 +1,31 @@
+---
+export async function getStaticPaths() {
+  const entries: any = JSON.parse(await  (
+    await fetch("http://127.0.0.1:8000/api/v2/pages", {
+      method: "GET", // *GET, POST, PUT, DELETE, etc.
+    })
+  ).text());
+console.log(entries)
+  const pages = entries.items.map((item: any) => ({
+    params: { slug: item.meta.slug },
+    props: {
+      title: item.title,
+    },
+  }));
+  return pages;
+}
+
+const { title } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <title>{title}</title>
+  </head>
+  <body>
+    <h1>{title}</h1>
+    TEST
+    <!-- <time>{date}</time> -->
+    <!-- <article set:html={content} /> -->
+  </body>
+</html>
