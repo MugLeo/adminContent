@@ -1,15 +1,20 @@
 ---
+/**
+ * # Molecule Card
+ * The function is organize the content in columns  
+ */
 export interface Props {
 	title: string;
 	body: string;
-	href: string;
+	img: string;
 }
 
-const { href, title, body } = Astro.props;
+const { href, title, body, img } = Astro.props;
 ---
 
 <li class="link-card">
 	<a href={href}>
+		<img src={img} alt="image">
 		<h2>
 			{title}
 			<span>&rarr;</span>

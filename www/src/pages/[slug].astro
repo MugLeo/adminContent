@@ -1,21 +1,24 @@
 ---
+import MlCard from "../components/molecules/MlCard.astro";
+
 export async function getStaticPaths() {
-  const entries: any = JSON.parse(await  (
-    await fetch("http://127.0.0.1:8000/api/v2/pages", {
-      method: "GET", // *GET, POST, PUT, DELETE, etc.
-    })
-  ).text());
-console.log(entries)
-  const pages = entries.items.map((item: any) => ({
-    params: { slug: item.meta.slug },
+  const entry: any = JSON.parse(
+    await // TODO: move to .env
+    (await fetch("http://127.0.0.1:8000/api/v2/pages/4")).text()
+  );
+
+
+  const page = {
+    params: { slug: entry.meta.slug },
     props: {
-      title: item.title,
+      title: entry.title,
+      body: entry?.body,
     },
-  }));
-  return pages;
+  };
+  return [page];
 }
 
-const { title } = Astro.props;
+const { title, body } = Astro.props;
 ---
 
 <html lang="en">
@@ -24,8 +27,19 @@ const { title } = Astro.props;
   </head>
   <body>
     <h1>{title}</h1>
-    TEST
-    <!-- <time>{date}</time> -->
-    <!-- <article set:html={content} /> -->
+
+    <!-- TODO: fix to optional types, this can be whatever Molecule or Organisms -->
+    {
+      body?.map((columnContainer: any) =>
+        columnContainer.value?.elements?.map((card: any) => (
+          <MlCard
+            body={card.value?.body_text}
+            title={card.value?.title_text}
+            img={card.value?.image}
+          />
+        ))
+      ).flatMap((x:any)=>x)
+    }
+    <div>{}</div>
   </body>
 </html>
