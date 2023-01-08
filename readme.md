@@ -1,6 +1,9 @@
 # ADMIN CONTENT
 
+### TODO
 
+- [ ] Dynamic environment
+- [ ] 
 ### STYLE GUIDE
 
 > Convention for good code

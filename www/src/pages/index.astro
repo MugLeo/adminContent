@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/molecules/MlCard.astro';
+import MlCard from '../components/molecules/MlCard.astro';
 ---
 
 <Layout title="Welcome to Astro.">
@@ -11,8 +12,7 @@ import Card from '../components/molecules/MlCard.astro';
 			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
 		</p>
 		<ul role="list" class="link-card-grid">
-			<Card
-				href="https://docs.astro.build/"
+			<MlCard
 				title="Documentation"
 				body="Learn how Astro works and explore the official API docs."
 			/>
