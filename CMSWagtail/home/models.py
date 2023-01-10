@@ -20,7 +20,6 @@ class HomePage(Page):
     # header = OrHeader()
     # footer = OrFooter()
 
-    # TODO: move logic to or_column_container and move card inside
     body = StreamField([
         ('or_column_container', OrColumnContainer()),
         # ('or_banner', OrBanner())

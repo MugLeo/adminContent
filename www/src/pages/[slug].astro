@@ -1,21 +1,9 @@
 ---
 import MlCard from "../components/molecules/MlCard.astro";
+import { getPagesProps } from "../shared/services/cms/cms.service";
 
 export async function getStaticPaths() {
-  const entry: any = JSON.parse(
-    await // TODO: move to .env
-    (await fetch("http://127.0.0.1:8000/api/v2/pages/4")).text()
-  );
-
-
-  const page = {
-    params: { slug: entry.meta.slug },
-    props: {
-      title: entry.title,
-      body: entry?.body,
-    },
-  };
-  return [page];
+  return await getPagesProps();
 }
 
 const { title, body } = Astro.props;
@@ -30,16 +18,17 @@ const { title, body } = Astro.props;
 
     <!-- TODO: fix to optional types, this can be whatever Molecule or Organisms -->
     {
-      body?.map((columnContainer: any) =>
-        columnContainer.value?.elements?.map((card: any) => (
-          <MlCard
-            body={card.value?.body_text}
-            title={card.value?.title_text}
-            img={card.value?.image}
-          />
-        ))
-      ).flatMap((x:any)=>x)
+      body
+        ?.map((columnContainer: any) =>
+          columnContainer.value?.elements?.map((card: any) => (
+            <MlCard
+              body={card.value?.body_text}
+              title={card.value?.title_text}
+              img={card.value?.image}
+            />
+          ))
+        )
+        .flatMap((x: any) => x)
     }
-    <div>{}</div>
   </body>
 </html>
