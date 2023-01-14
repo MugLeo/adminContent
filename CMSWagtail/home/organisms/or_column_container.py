@@ -22,52 +22,50 @@ class OrColumnContainer(blocks.StructBlock):
 def get_size():
   return [('px','px'),('fr','fr'),]
 
-class Column(blocks.StructBlock):
-    size = blocks.IntegerBlock(required=False, min_value=1)
+class Size(blocks.StructBlock):
+    value = blocks.IntegerBlock(required=False, min_value=1)
     unit_type = blocks.ChoiceBlock(choices=get_size, required=False)
 
     class Meta:
         icon = "snippet"
-        label = "Column"
+        label = "Size"
 
     api_fields = [
-        APIField('size'),
         APIField('unit_type'),
-    ]
-
-class Row(blocks.StructBlock):
-    size = blocks.IntegerBlock(required=False, min_value=1)
-    unit_type = blocks.ChoiceBlock(choices=get_size, required=False)
-
-    class Meta:
-        icon = "snippet"
-        label = "Row"
-
-    api_fields = [
-        APIField('size'),
-        APIField('unit_type'),
+        APIField('value'),
     ]
 
 class GridContainer(blocks.StructBlock):
     items = blocks.IntegerBlock(required=False, min_value=1)
 
     column = blocks.StreamBlock([
-        ('column', Column()),
+        ('column', Size()),
     ], blank=True, use_json_field=True)
+
+    column_gap = blocks.StreamBlock([
+        ('column_gap', Size()),
+    ], blank=True, use_json_field=True, max_num=1)
 
     row = blocks.StreamBlock([
-        ('row', Row()),
+        ('row', Size()),
     ], blank=True, use_json_field=True)
 
+    row_gap = blocks.StreamBlock([
+        ('row_gap', Size()),
+    ], blank=True, use_json_field=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('items'),
         FieldPanel('column'),
-        FieldPanel('row')
+        FieldPanel('column_gap'),
+        FieldPanel('row'),
+        FieldPanel('row_gap'),
     ]
 
     api_fields = [
         APIField('items'),
         APIField('column'),
+        APIField('column_gap'),
         APIField('row'),
+        APIField('row_gap'),
    ]
